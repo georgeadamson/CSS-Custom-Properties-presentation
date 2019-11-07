@@ -1,225 +1,721 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<title>Inspire.js: A brief introduction</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <title>CSS Custom Properties: A brief introduction</title>
 
-	<link href="inspire.css" rel="stylesheet" />
-	<link href="theme.css" rel="stylesheet" />
-	<link href="talk.css" rel="stylesheet" />
-</head>
-<body class="language-markup" data-prism-plugins="normalize-whitespace">
+    <link href="inspire.css" rel="stylesheet" />
+    <link href="theme.css" rel="stylesheet" />
+    <link href="talk.css" rel="stylesheet" />
+  </head>
+  <body class="language-markup" data-prism-plugins="normalize-whitespace">
+    <header id="intro" class="slide">
+      <h1>
+        CSS Variables
+      </h1>
+      <h2>
+        Intro and quirks
+      </h2>
+      <p class="attribution">
+        By <a href="https://about.me/georgeadamson">George Adamson</a>
+        <!--<br />
+        <small
+          >Presentation framework by
+          <a href="http://lea.verou.me">Lea Verou</a></small
+        >
+      </p>-->
+      </p>
+    </header>
 
-<header id="intro" class="slide">
-	<h1>
-		Inspire.js
-	</h1>
-	<h2>
-		Lean,&nbsp;hackable,&nbsp;extensible slide&nbsp;deck&nbsp;framework
-	</h2>
-	<p class="attribution">By <a href="http://lea.verou.me">Lea Verou</a> and <a href="https://github.com/LeaVerou/inspire.js/graphs/contributors">contributors</a></p>
-</header>
-<section>
-	<header class="slide">
-		<h1>Introduction</h1>
-	</header>
+    <section>
+      <header class="slide">
+        <h1>Introduction</h1>
+      </header>
 
-	<article class="slide" title="Inspire.js: Introduction">
-		<h1>Main idea</h1>
+      <article class="slide">
+        <h1>What are they?</h1>
 
-		<ul class="delayed-children">
-			<li>An HTML file contains the whole presentation</li>
-			<li>Themes as CSS files</li>
-			<li>Plugins for extra functionality, autoloaded when used</li>
-			<li>Nice JavaScript API for really custom things</li>
-		</ul>
-	</article>
+        <ul>
+          <li>
+            They're like variables you use in other languages 🤓
+            <div>
+              <br />
+              but...
+            </div>
+            <br />
+          </li>
 
-	<article class="slide">
-		<h1>History</h1>
-		<ul>
-			<li>Originally created in 2010 for my first talk, at <a href="http://front-trends.com">Front Trends 2010</a></li>
-			<li>By popular demand, it was released shortly after, named CSSS</li>
-			<li>Huge refactor and renaming to Inspire.js in Sep 2018</li>
-		</ul>
-	</article>
+          <li>
+            They're <em>not</em> like variables you use in other languages 🤪
+          </li>
+        </ul>
+      </article>
 
-	<article class="slide">
-		<h1>Syntax</h1>
+      <article class="slide">
+        <h1>Like SASS variables?</h1>
 
-		<ul>
-			<li>Slides are defined by adding the <code>slide</code> class to any elements.</li>
-			<li><code>&lt;header class="slide"></code> is a header slide (relevant for the <a href="#overview">Overview</a>)</li>
-		</ul>
-	</article>
+        <ul>
+          <li>
+            Nope, but at first you'll think they are.
+          </li>
+        </ul>
+      </article>
 
-	<article class="slide" id="navigation">
-		<h1>Keyboard Navigation</h1>
-		<ul>
-			<li><kbd>→</kbd> or <kbd>↓</kbd> to advance to the next slide or incrementally displayed item</li>
-			<li><kbd>←</kbd> or <kbd>↑</kbd> to go to the previous slide or incrementally displayed item</li>
-			<li><kbd>Ctrl</kbd><kbd>→</kbd> or <kbd>Ctrl</kbd><kbd>↓</kbd> to jump to the next slide</li>
-			<li><kbd>Ctrl</kbd><kbd>←</kbd> or <kbd>Ctrl</kbd><kbd>↑</kbd> to jump to the previous slide</li>
-			<li>Home to go to the first slide, End to go to the last</li>
-			<li><kbd>Ctrl</kbd><kbd>G</kbd> to jump to an arbitrary slide (by slide number or identifier)</li>
-		</ul>
-	</article>
-</section>
+      <article class="slide">
+        <h1>Syntax</h1>
 
-<section>
-	<header class="slide">
-		<h1>Features</h1>
-	</header>
+        <ul>
+          <li>
+            Always prefixed with 2 hyphens:
+            <code class="language-css">--example</code>
+          </li>
+          <li>
+            Set it just like any normal css property, but...
+          </li>
+          <li>
+            Use special syntax to read it.
+          </li>
+        </ul>
 
-	<article class="slide" id="data-insert">
-		<h1>Repeated slides</h1>
+        <dl>
+          <dt>Set:</dt>
+          <dd>
+            <code class="language-css">--primary-text-color: violet;</code
+            ><br />
+          </dd>
+          <dt>Get:</dt>
+          <dd>
+            <code class="language-css">color: var(--primary-text-color);</code>
+          </dd>
+        </dl>
+      </article>
 
-		<ul>
-			<li>Use attribute <code>data-insert="#id"</code> on an empty slide to re-insert it later in the slideshow</li>
-			<li>Notice how this slide will also be re-inserted after the next one!</li>
-		</ul>
-	</article>
+      <article class="demo slide" id="livedemo-syntax">
+        <textarea class="language-css">
+          :root {
+            --primary-text-color: violet;
+          }
 
-	<article class="slide">
-		<h1>IDs and titles</h1>
-		<ul>
-			<li>IDs are dynamically assigned by JavaScript, but you can also use your own</li>
-			<li>Slide titles (used in the browser tab when the slide is active, and in the <a href="#overview">Overview</a>) via the <code>title</code> or <code>data-title</code> attributes or headings in the slide.</li>
-			<li>If only an id or only a title is provided, the other is extracted from it.</li>
-		</ul>
-	</article>
+          h1 {
+            color: var(--primary-text-color, green);
+          }
 
-	<article class="slide" data-insert="#data-insert"></article>
+          p {
+            color: var(--primary-text-color);
+            filter: invert(1);
+          }
 
-	<article class="slide">
-		<h1>Incremental display</h1>
+          /* On this slide:
+           * 🏠 :root == html or svg or xml.
+           * 😎 Ooh look, the h1 has a default value.
+           */
+        </textarea>
+        <textarea class="language-html">
+          <h1>Live demo heading!</h1>
+          <p class="demo1">This text uses the same variables</p>
+        </textarea>
+      </article>
 
-		<ul class="delayed-children">
-			<li>Incremental display of slide contents (just add <code>class="delayed"</code>)</li>
-			<li>Use selector <code>.delayed:not(.current):not(.displayed)</code> to change the style of undisplayed items</li>
-			<li>Use selector <code>.delayed.displayed</code> to change the style of displayed items</li>
-			<li>Use selector <code>.delayed.current</code> to change the style of current items</li>
-			<li>Use <code>class="delayed-children"</code> to apply the <code>delayed</code> class to all of an element’s children</li>
-			<li>
-				Nested delayed items <strong class="delayed">are possible</strong>!
-			</li>
-		</ul>
-	</article>
-</section>
+      <article class="demo slide" id="livedemo-syntax2">
+        <textarea class="language-css">
+          :root {
+            --primary-text-color: violet;
+          }
 
-<section>
-	<header class="slide">
-		<h1>Plugins</h1>
-	</header>
+          h1 {
+            color: var(--primary-text-color, green);
+          }
 
-	<article class="slide" id="overview">
-		<h1>Overview</h1>
+          p {
+            color: var(--primary-text-color);
+            filter: invert(1);
+          }
 
-		<ul>
-			<li>Loaded automatically, use <code>&lt;code class="no-overview"></code> to prevent this.</li>
-			<li>Press <kbd>Ctrl</kbd>+<kbd>H</kbd> (or <kbd>Shift</kbd>+<kbd>H</kbd>) to trigger, <kbd>Esc</kbd> to close.</li>
-			<li class="delayed">Cool, huh? You can press <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>H</kbd> to see all slides</li>
-		</ul>
-	</article>
+          p.bg {
+            color: #000;
+            background-color: var(--primary-text-color);
+          }
+        </textarea>
+        <textarea class="language-html">
+            <h1>Live demo heading!</h1>
+            <p>This text uses the same variables</p>
+            <p class="bg" style="padding:0 1em">And again with background instead</p>
+          </textarea
+        >
+      </article>
 
-	<article class="slide">
-		<h1>Syntax highlighting with PrismJS</h1>
+      <article class="demo slide" id="livedemo-defaults">
+        <h1>✅ Re-use and scope</h1>
+        <textarea class="language-css">
+          :root {
+            --primary-text-color: purple;
+          }
 
-		<ul>
-			<li>Autoloads core & languages used</li>
-			<li>Load plugins by listing their ids in a <code>data-prism-plugins</code> attribute, on any element (first one will be used).</li>
-			<li>Automatically figures out dependencies & aliases</li>
-			<li>CSS is up to you!</li>
-		</ul>
-		<pre class="language-jsx"><code>var start = new Date().getTime();
+          h1 {
+            color: var(--primary-text-color, green);
+          }
+
+          p {
+            border: 1px solid currentColor;
+            color: var(--primary-text-color);
+            filter: invert(1);
+          }
+
+          /* On this slide:
+           * 📏 Try adding --p-border-width: 1px;
+           * 🐠 Try locally scoped --primary-text-color: red;
+           */
+        </textarea>
+        <textarea class="language-html">
+          <h1>Live demo!</h1>
+          <p style="padding:0 1em">Re-using variables</p>
+        </textarea>
+      </article>
+
+      <article class="demo slide" id="livedemo-scope">
+        <h1>✅ Using style="..." attribute</h1>
+        <textarea class="language-css">
+          :root {
+            --border-width: 1px;
+          }
+
+          p {
+            border: var(--border-width) solid var(--border-color, currentColor);
+            padding:0 1em;
+          }
+        </textarea>
+        <textarea class="language-html">
+          <p style="--border-width: 10px; --border-color: blue">Style attribute overrides CSS</p>
+        </textarea>
+      </article>
+
+      <article class="demo slide" id="livedemo-calc">
+        <h1>✅ Using calc()</h1>
+        <textarea class="language-css">
+          :root {
+            --border-width: 1;
+          }
+
+          h1 {
+            color: violet;
+          }
+
+          p {
+            --bw: calc(var(--border-width) * 1px);
+            border: var(--bw) solid currentColor;
+            color: violet;
+            filter: invert(1);
+          }
+        </textarea>
+        <textarea class="language-html">
+          <h1>Using calc() to fix unitless</h1>
+          <p style="padding:0 1em">Border now has units</p>
+        </textarea>
+      </article>
+
+      <article class="demo slide" id="livedemo-img-src">
+        <h1>✅ Using variable for url()</h1>
+        <textarea class="language-css">
+          .img {
+            --url: url("https://loremflickr.com/320/240");
+            background: #000 center/cover var(--url);
+            height: 20rem;
+          }
+        </textarea>
+        <textarea class="language-html">
+          <div class="img" style="padding:1em">Random demo image</div>
+        </textarea>
+      </article>
+
+      <article class="demo slide" id="livedemo-string-concat">
+        <h1>✅ Content string concatenation</h1>
+        <textarea class="language-css">
+          p:after {
+            --name: "world";
+            content: "Hello " var(--name);
+          }
+        </textarea>
+        <textarea class="language-html">
+          <p>Message: </p>
+        </textarea>
+      </article>
+
+      <article class="demo slide" id="livedemo-url-concat">
+        <h1>❌ Url string concatenation</h1>
+        <textarea class="language-css">
+          .img {
+            --url: url("https://loremflickr.com/320/240");
+            background: #000 center/cover var(--url);
+            height: 20rem;
+          }
+
+          /* Would be cool if we could do this... */
+          img {
+            --src: attr(src);
+            --url: url(var(--src));
+            background: #000 center/cover var(--url);
+          }
+        </textarea>
+        <textarea class="language-html">
+          <div class="img" style="padding:1em">Random demo image</div>
+        </textarea>
+      </article>
+
+      <article class="demo slide" id="livedemo-counter">
+        <h1>✅ counter()</h1>
+        <textarea class="language-css">
+          li {
+            --myNumber: 1;
+            counter-increment: myCounter var(--myNumber);
+          }
+
+          li:before {
+            content: counter(myCounter);
+          }
+        </textarea>
+        <textarea class="language-html">
+          <ol style="list-style:none">
+            <li> Counter demo</li>
+            <li> Counter demo</li>
+            <li> Counter demo</li>
+          </ol>
+        </textarea>
+      </article>
+
+      <article class="demo slide" id="livedemo-aspect-ratio">
+        <h1>✅ Aspect-ratio</h1>
+        <textarea class="language-html">
+          <p>Natural size</p>
+          <img src="https://asset-apac.unileversolutions.com/content/dam/unilever/sunsilk/india/general_image/hair_care/other_hair_care/header_needssmooth_2048x706-771873.jpg.ulenscale.2048x533.jpg"/>
+
+          <p>Custom aspect ratio using CSS only</p>
+          <img src="https://asset-apac.unileversolutions.com/content/dam/unilever/sunsilk/india/general_image/hair_care/other_hair_care/header_needssmooth_2048x706-771873.jpg.ulenscale.2048x533.jpg"
+            style="
+            --width: 100;
+            --height: 40;
+            --src: url('https://asset-apac.unileversolutions.com/content/dam/unilever/sunsilk/india/general_image/hair_care/other_hair_care/header_needssmooth_2048x706-771873.jpg.ulenscale.2048x533.jpg');"
+          ></img>
+          
+          <p>Custom aspect ratio using CSS + JS</p>
+          <img src="https://asset-apac.unileversolutions.com/content/dam/unilever/sunsilk/india/general_image/hair_care/other_hair_care/header_needssmooth_2048x706-771873.jpg.ulenscale.2048x533.jpg"
+            style="
+            --width: 100;
+            --height: 15;"
+            onload="this.style.setProperty('--src','url('+this.src+')')"
+          ></img>
+
+          /* Also try --aspect-ratio: 6; */
+        </textarea>
+        <textarea class="language-css">
+          /* Target browsers that support css custom properties: */
+          @supports (color: var(--x)) {
+            /* Any image that...
+               - Sets --width & --height or
+               - Sets --aspect-ratio */
+            img[style*='--width:'][style*='--height:'],
+            img[style*='--aspect-ratio:'] {
+              /* Aspect ratio: Set height relative to width: */
+              padding-bottom: calc(100% / var(--r));
+              display: inline-block;
+              width: 100%;
+              height: 0;
+
+              /* Tiny transparent pixel, courtesy of http://png-pixel.com/ */
+              --t: url('data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==');
+
+              /* Assume defaults when not specified: */
+              --w: var(--width, 100);
+              --h: var(--height, 100);
+              --r: var(--aspect-ratio, calc(var(--w) / var(--h)));
+
+              /* Both images default to --t when missing or invalid.
+                 Without this, we can fail to see any background-image at all. */
+              background: center / cover no-repeat;
+              background-image: var(--src, var(--t)), var(--lowsrc, var(--t));
+            }
+          }
+        </textarea>
+      </article>
+
+      <article class="demo slide" id="livedemo-blurup-intro">
+        <h1>"Blur up" & aspect ratio</h1>
+        <textarea class="language-html">
+          <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/2wCEAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBABAwMDBAMECAQECBALCQsQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEP/AABEIAAUAFAMBEQACEQEDEQH/xABqAAEBAAAAAAAAAAAAAAAAAAAFCBAAAQQBAwQDAAAAAAAAAAAAAgEDBBEFAAYSBxMhMUFhcQEAAwEAAAAAAAAAAAAAAAAAAgMEBREAAQMEAgMBAAAAAAAAAAAAAQIDEQAEEjEhQRNxgaH/2gAMAwEAAhEDEQA/ALx3DmJkHBZN2GXZlxcO+40+PsDIL5Ii2lpxSrtPGsyxBuIkwCYq64OKvQoXoZt3DbG6du7G29FVuLghOQbzhcjlPvIMh10kSkFSN0lWva2vzombfwKXb5FWPZ5Jnn8mANAaon3gvB4JCQroaEEj7qZpUsi5kHHHu2jNFx4gRV++/vTUtGN0hxyDqv/Z" />
+          ⬇
+          <img src="https://asset-apac.unileversolutions.com/content/dam/unilever/sunsilk/india/general_image/hair_care/other_hair_care/header_needssmooth_2048x706-771873.jpg.ulenscale.2048x533.jpg" />
+        </textarea>
+        <textarea class="language-css">
+          img {
+            height: 20em;
+          }
+        </textarea>
+      </article>
+
+      <article class="demo slide" id="livedemo-blurup">
+        <h1>✅ blur-up</h1>
+        <textarea class="language-html">
+          <p>Normal aspect ratio</p>
+          <img src="https://asset-apac.unileversolutions.com/content/dam/unilever/sunsilk/india/general_image/hair_care/other_hair_care/header_needssmooth_2048x706-771873.jpg.ulenscale.2048x533.jpg"
+            style="--width: 100;
+            --height: 30;
+            --src: url('https://asset-apac.unileversolutions.com/content/dam/unilever/sunsilk/india/general_image/hair_care/other_hair_care/header_needssmooth_2048x706-771873.jpg.ulenscale.2048x533.jpg');
+            --lowsrc: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/2wCEAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBABAwMDBAMECAQECBALCQsQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEP/AABEIAAUAFAMBEQACEQEDEQH/xABqAAEBAAAAAAAAAAAAAAAAAAAFCBAAAQQBAwQDAAAAAAAAAAAAAgEDBBEFAAYSBxMhMUFhcQEAAwEAAAAAAAAAAAAAAAAAAgMEBREAAQMEAgMBAAAAAAAAAAAAAQIDEQAEEjEhQRNxgaH/2gAMAwEAAhEDEQA/ALx3DmJkHBZN2GXZlxcO+40+PsDIL5Ii2lpxSrtPGsyxBuIkwCYq64OKvQoXoZt3DbG6du7G29FVuLghOQbzhcjlPvIMh10kSkFSN0lWva2vzombfwKXb5FWPZ5Jnn8mANAaon3gvB4JCQroaEEj7qZpUsi5kHHHu2jNFx4gRV++/vTUtGN0hxyDqv/Z')"
+          ></img>
+          
+          <p>Short aspect ratio</p>
+          <img src="https://asset-apac.unileversolutions.com/content/dam/unilever/sunsilk/india/general_image/hair_care/other_hair_care/header_needssmooth_2048x706-771873.jpg.ulenscale.2048x533.jpg"
+            style="--width: 100;
+            --height: 15;
+            --lowsrc: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/2wCEAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBABAwMDBAMECAQECBALCQsQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEP/AABEIAAUAFAMBEQACEQEDEQH/xABqAAEBAAAAAAAAAAAAAAAAAAAFCBAAAQQBAwQDAAAAAAAAAAAAAgEDBBEFAAYSBxMhMUFhcQEAAwEAAAAAAAAAAAAAAAAAAgMEBREAAQMEAgMBAAAAAAAAAAAAAQIDEQAEEjEhQRNxgaH/2gAMAwEAAhEDEQA/ALx3DmJkHBZN2GXZlxcO+40+PsDIL5Ii2lpxSrtPGsyxBuIkwCYq64OKvQoXoZt3DbG6du7G29FVuLghOQbzhcjlPvIMh10kSkFSN0lWva2vzombfwKXb5FWPZ5Jnn8mANAaon3gvB4JCQroaEEj7qZpUsi5kHHHu2jNFx4gRV++/vTUtGN0hxyDqv/Z')"
+            onload="this.style.setProperty('--src','url('+this.src+')');this.setAttribute('data-img-loaded','')"
+          ></img>
+        </textarea>
+        <textarea class="language-css">
+          /* Target browsers that support css custom properties: */
+          @supports (color: var(--x)) {
+            /* Any image that...
+               - Sets --src property in style attribute or
+               - Sets --src when it loads. */
+            img[style*='--src:'],
+            img[onload*='--src'] {
+              /* Aspect ratio: Set height relative to width: */
+              padding-bottom: calc(100% / var(--r));
+              display: inline-block;
+              width: 100%;
+              height: 0;
+
+              /* Tiny transparent pixel, courtesy of http://png-pixel.com/ */
+              --t: url('data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==');
+
+              /* Assume defaults when not specified: */
+              --w: var(--width, 100);
+              --h: var(--height, 100);
+              --r: var(--aspect-ratio, calc(var(--w) / var(--h)));
+
+              /* Both images default to --t when missing or invalid.
+                 Without this, we can fail to see any background-image at all. */
+              background: center / cover no-repeat;
+              background-image: var(--src, var(--t)), var(--lowsrc, var(--t));
+
+              animation: blurup 0.5s ease;
+              animation-play-state: paused;
+
+              /* Pause on final frame:
+                 Unused. This seems to cause flicker after animation.
+                 animation-fill-mode: forwards; */
+
+              /* To transition from blur to full image:
+                 Revert to transparent image when -src or --lowsrc are invalid. */
+              @keyframes blurup {
+                0% {
+                  background-image: var(--lowsrc, var(--t));
+                }
+                100% {
+                  background-image: var(--src, var(--t)), var(--lowsrc, var(--t));
+                }
+              }
+            }
+
+            /* Trigger transition from blur to full image:
+               Images that set --lowsrc but will not set --src onload: */
+            img[style*='--lowsrc:']:not([onload*='--src']),
+            /* Images that set --src onload: */
+            img[onload*='--src'][data-img-loaded] {
+              animation-play-state: running;
+            }
+          }
+        </textarea>
+      </article>
+
+      <article class="slide">
+        <h1>Problems with Custom Properties</h1>
+
+        <ul>
+          <li>
+            They don't always play nicely with Hot Module Reload (HMR)
+            <ul>
+              <li>Because of :root CSS</li>
+            </ul>
+          </li>
+          <li>
+            Not supported by IE11 but...
+            <ul>
+              <li>They can be polyfilled. Sort of.</li>
+              <li>Do you need full support in IE11 anyway?</li>
+            </ul>
+          </li>
+          <li>
+            Performance?
+            <ul>
+              <li>I noticed dev tools slowing down</li>
+            </ul>
+          </li>
+        </ul>
+      </article>
+    </section>
+
+    <section>
+      <header class="slide">
+        <h1>The --end</h1>
+      </header>
+    </section>
+
+    <!-- <section>
+      <header class="slide">
+        <h1>Features</h1>
+      </header>
+
+      <article class="slide" id="data-insert">
+        <h1>Repeated slides</h1>
+
+        <ul>
+          <li>
+            Use attribute <code>data-insert="#id"</code> on an empty slide to
+            re-insert it later in the slideshow
+          </li>
+          <li>
+            Notice how this slide will also be re-inserted after the next one!
+          </li>
+        </ul>
+      </article>
+
+      <article class="slide">
+        <h1>IDs and titles</h1>
+        <ul>
+          <li>
+            IDs are dynamically assigned by JavaScript, but you can also use
+            your own
+          </li>
+          <li>
+            Slide titles (used in the browser tab when the slide is active, and
+            in the <a href="#overview">Overview</a>) via the
+            <code>title</code> or <code>data-title</code> attributes or headings
+            in the slide.
+          </li>
+          <li>
+            If only an id or only a title is provided, the other is extracted
+            from it.
+          </li>
+        </ul>
+      </article>
+
+      <article class="slide" data-insert="#data-insert"></article>
+
+      <article class="slide">
+        <h1>Incremental display</h1>
+
+        <ul class="delayed-children">
+          <li>
+            Incremental display of slide contents (just add
+            <code>class="delayed"</code>)
+          </li>
+          <li>
+            Use selector <code>.delayed:not(.current):not(.displayed)</code> to
+            change the style of undisplayed items
+          </li>
+          <li>
+            Use selector <code>.delayed.displayed</code> to change the style of
+            displayed items
+          </li>
+          <li>
+            Use selector <code>.delayed.current</code> to change the style of
+            current items
+          </li>
+          <li>
+            Use <code>class="delayed-children"</code> to apply the
+            <code>delayed</code> class to all of an element’s children
+          </li>
+          <li>
+            Nested delayed items <strong class="delayed">are possible</strong>!
+          </li>
+        </ul>
+      </article>
+    </section>
+
+    <section>
+      <header class="slide">
+        <h1>Plugins</h1>
+      </header>
+
+      <article class="slide" id="overview">
+        <h1>Overview</h1>
+
+        <ul>
+          <li>
+            Loaded automatically, use
+            <code>&lt;code class="no-overview"></code> to prevent this.
+          </li>
+          <li>
+            Press <kbd>Ctrl</kbd>+<kbd>H</kbd> (or
+            <kbd>Shift</kbd>+<kbd>H</kbd>) to trigger, <kbd>Esc</kbd> to close.
+          </li>
+          <li class="delayed">
+            Cool, huh? You can press <kbd>Ctrl</kbd><kbd>Shift</kbd
+            ><kbd>H</kbd> to see all slides
+          </li>
+        </ul>
+      </article>
+
+      <article class="slide">
+        <h1>Syntax highlighting with PrismJS</h1>
+
+        <ul>
+          <li>Autoloads core & languages used</li>
+          <li>
+            Load plugins by listing their ids in a
+            <code>data-prism-plugins</code> attribute, on any element (first one
+            will be used).
+          </li>
+          <li>Automatically figures out dependencies & aliases</li>
+          <li>CSS is up to you!</li>
+        </ul>
+        <pre class="language-jsx"><code>var start = new Date().getTime();
 setInterval(function() {
 	React.render(
 		&lt;ExampleApplication elapsed={new Date().getTime() - start} />,
 		document.getElementById('container')
 	);
 }, 50);</code></pre>
-	</article>
+      </article>
 
-	<article class="slide" data-video="https://mavo.io/demos/eshop/video.mp4" style="--url: 'https://mavo.io/demos/eshop'" id="media-plugin">
-		<div>
-			<h1>Annotated videos</h1>
-			<ul>
-				<li><code>data-video</code> for URL</li>
-				<li><code>class="annotation"</code> for annotations</li>
-				<li><code>data-time</code> and <code>data-pause</code> on annotations</li>
-			</ul>
-		</div>
-		<span class="annotation top-pointer" style="top: 44%; left: 59.5%; --pointer-left: 4em;" data-time="3000 to 3500" data-pause>Click to dismiss & resume</span>
-		<span class="annotation top-pointer" style="top: 26%; left: 67.1%" data-time="5200 to 5700" data-pause="2000">Auto-resume after 2sec</span>
-	</article>
+      <article
+        class="slide"
+        data-video="https://mavo.io/demos/eshop/video.mp4"
+        style="--url: 'https://mavo.io/demos/eshop'"
+        id="media-plugin"
+      >
+        <div>
+          <h1>Annotated videos</h1>
+          <ul>
+            <li><code>data-video</code> for URL</li>
+            <li><code>class="annotation"</code> for annotations</li>
+            <li>
+              <code>data-time</code> and <code>data-pause</code> on annotations
+            </li>
+          </ul>
+        </div>
+        <span
+          class="annotation top-pointer"
+          style="top: 44%; left: 59.5%; --pointer-left: 4em;"
+          data-time="3000 to 3500"
+          data-pause
+          >Click to dismiss & resume</span
+        >
+        <span
+          class="annotation top-pointer"
+          style="top: 26%; left: 67.1%"
+          data-time="5200 to 5700"
+          data-pause="2000"
+          >Auto-resume after 2sec</span
+        >
+      </article>
 
-	<article class="demo slide" id="livedemo">
-		<textarea class="language-html"><p>Live demo!</p></textarea>
-		<textarea class="language-css">
+      <article class="demo slide" id="livedemo">
+        <textarea class="language-html"><p>Live demo!</p></textarea>
+        <textarea class="language-css">
 			p {
 				font-size: 250%;
 				color: #f06;
 			}
-		</textarea>
-	</article>
+		</textarea
+        >
+      </article>
 
-	<article class="isolated demo slide" id="isolated-livedemo">
-		<textarea class="language-html"><p>Live demo in iframe!</p></textarea>
-		<textarea class="language-css">
+      <article class="isolated demo slide" id="isolated-livedemo">
+        <textarea class="language-html"><p>Live demo in iframe!</p></textarea>
+        <textarea class="language-css">
 			p {
 				font-size: 250%;
 				color: #f06;
 			}
-		</textarea>
-	</article>
+		</textarea
+        >
+      </article>
 
-	<article class="slide">
-		<h1>Timer</h1>
-		<ul>
-			<li>Define the talk duration with the attribute <code>data-duration</code> on the <code>body</code>.</li>
-			<li>Timer in the form of a progress bar on the top</li>
-			<li>Style the timer and the end state with the selectors <code>#timer</code> and <code>#timer.end</code> respectively.</li>
-		</ul>
-	</article>
+      <article class="slide">
+        <h1>Timer</h1>
+        <ul>
+          <li>
+            Define the talk duration with the attribute
+            <code>data-duration</code> on the <code>body</code>.
+          </li>
+          <li>Timer in the form of a progress bar on the top</li>
+          <li>
+            Style the timer and the end state with the selectors
+            <code>#timer</code> and <code>#timer.end</code> respectively.
+          </li>
+        </ul>
+      </article>
 
-	<article class="slide" data-resolution="1024 768">
-		<h1>Resolution</h1>
-		<ul>
-			<li>Design for a specific resolution, and have slides scale up and down based on the viewport.</li>
-			<li>Define with the attribute <code>data-resolution</code> on the <code>&lt;body></code> for all slides, a grouping element, or individual slides (like this one!).</li>
-			<li>Try resizing the viewport, note how the slide size adapts!</li>
-		</ul>
-	</article>
+      <article class="slide" data-resolution="1024 768">
+        <h1>Resolution</h1>
+        <ul>
+          <li>
+            Design for a specific resolution, and have slides scale up and down
+            based on the viewport.
+          </li>
+          <li>
+            Define with the attribute <code>data-resolution</code> on the
+            <code>&lt;body></code> for all slides, a grouping element, or
+            individual slides (like this one!).
+          </li>
+          <li>Try resizing the viewport, note how the slide size adapts!</li>
+        </ul>
+      </article>
 
-	<article class="slide">
-		<h1>Presenter View</h1>
+      <article class="slide">
+        <h1>Presenter View</h1>
 
-		<ul>
-			<li>Use <code>&lt;p class="presenter-notes"></code> for presenter notes. You need at least one of these to have the plugin loaded.</li>
-			<li>Presenter view with <kbd>Ctrl</kbd><kbd>P</kbd> (or <kbd>Shift</kbd><kbd>P</kbd>)</li>
-			<li>Also timer, upcoming slide</li>
-		</ul>
-	</article>
+        <ul>
+          <li>
+            Use <code>&lt;p class="presenter-notes"></code> for presenter notes.
+            You need at least one of these to have the plugin loaded.
+          </li>
+          <li>
+            Presenter view with <kbd>Ctrl</kbd><kbd>P</kbd> (or <kbd>Shift</kbd
+            ><kbd>P</kbd>)
+          </li>
+          <li>Also timer, upcoming slide</li>
+        </ul>
+      </article>
 
-	<article class="slide" id="slidestyle">
-		<style data-slide>
-			.slide {
-				background: rebeccapurple;
-			}
-		</style>
-		<h1>Slide-specific CSS</h1>
-		<p>You can use the <code>data-slide</code> attribute on <code>&lt;style></code> elements in slides, to only style the current slide or inside sections that include multiple slides to style all of them and nothing else.</p>
-		<p>For example, run <code class="language-js">$('#slidestyle style').sheet.cssRules[0].selectorText</code> in the console to see how the original selector gets changed.</p>
-	</article>
-</section>
+      <article class="slide" id="slidestyle">
+        <style data-slide>
+          .slide {
+            background: rebeccapurple;
+          }
+        </style>
+        <h1>Slide-specific CSS</h1>
+        <p>
+          You can use the <code>data-slide</code> attribute on
+          <code>&lt;style></code> elements in slides, to only style the current
+          slide or inside sections that include multiple slides to style all of
+          them and nothing else.
+        </p>
+        <p>
+          For example, run
+          <code class="language-js"
+            >$('#slidestyle style').sheet.cssRules[0].selectorText</code
+          >
+          in the console to see how the original selector gets changed.
+        </p>
+      </article>
+    </section>
 
-<footer class="slide" title="The End">
-	<h1>Thank you!</h1>
-	<p>Get it or contribute at <a href="https://github.com/LeaVerou/inspire.js">github.com/LeaVerou/inspire.js</a></p>
-</footer>
+    <footer class="slide" title="The End">
+      <h1>Thank you!</h1>
+      <p>
+        Get it or contribute at
+        <a href="https://github.com/LeaVerou/inspire.js"
+          >github.com/LeaVerou/inspire.js</a
+        >
+      </p>
+    </footer> -->
 
-<script src="inspire.js"></script>
-
-</body>
+    <script src="inspire.js"></script>
+  </body>
 </html>
