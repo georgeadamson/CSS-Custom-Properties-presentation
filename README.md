@@ -1,4 +1,4 @@
-# A little interactive introduction to CSS Custom Properties
+# A little interactive presentation about CSS Custom Properties
 
 Also known as CSS Variables.
 
