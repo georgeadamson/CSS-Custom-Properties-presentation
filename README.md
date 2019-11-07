@@ -2,6 +2,6 @@
 
 Also known as CSS Variables.
 
-Viewable the slides at https://georgeadamson.github.io/CSS-Custom-Properties-presentation/#intro
+View the slides with interactive code at https://georgeadamson.github.io/CSS-Custom-Properties-presentation/#intro
 
 (Slide deck built using https://inspirejs.org/)
